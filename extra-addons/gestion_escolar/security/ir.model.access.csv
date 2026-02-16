@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gestion_escolar_class,access_gestion_escolar_class,gestion_escolar.model_gestion_escolar_class,base.group_user,1,1,1,1
+access_gestion_escolar_student,access_gestion_escolar_student,gestion_escolar.model_gestion_escolar_student,base.group_user,1,1,1,1
+access_gestion_escolar_event,access_gestion_escolar_event,gestion_escolar.model_gestion_escolar_event,base.group_user,1,1,1,1

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <!-- ===================== -->
+  <!-- CLASE: LIST + FORM    -->
+  <!-- ===================== -->
+
+  <!-- List view -->
+  <record id="view_gestion_escolar_class_list" model="ir.ui.view">
+    <field name="name">gestion_escolar.class.list</field>
+    <field name="model">gestion_escolar.class</field>
+    <field name="arch" type="xml">
+      <list string="Clases">
+        <field name="name"/>
+        <field name="grade"/>
+        <field name="tutor_id"/>
+        <field name="student_number"/>
+        <field name="date_begin"/>
+        <field name="date_end"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form view -->
+  <record id="view_gestion_escolar_class_form" model="ir.ui.view">
+    <field name="name">gestion_escolar.class.form</field>
+    <field name="model">gestion_escolar.class</field>
+    <field name="arch" type="xml">
+      <form string="Clase">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="grade"/>
+            <field name="tutor_id"/>
+            <field name="student_number" readonly="1"/>
+          </group>
+
+          <group>
+            <field name="date_begin"/>
+            <field name="date_end"/>
+          </group>
+
+          <notebook>
+            <page string="Alumnos">
+              <field name="student_ids">
+                <list editable="bottom">
+                  <field name="name"/>
+                  <field name="last_name"/>
+                  <field name="id_number"/>
+                  <field name="active"/>
+                </list>
+              </field>
+            </page>
+
+            <page string="Descripción">
+              <field name="description"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_gestion_escolar_class" model="ir.actions.act_window">
+    <field name="name">Clases</field>
+    <field name="res_model">gestion_escolar.class</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- Menú raíz -->
+  <menuitem id="menu_gestion_escolar_root"
+            name="Gestión Escolar"
+            sequence="10"/>
+
+  <!-- Submenú Clases -->
+  <menuitem id="menu_gestion_escolar_class"
+            name="Clases"
+            parent="menu_gestion_escolar_root"
+            action="action_gestion_escolar_class"
+            sequence="10"/>
+
+
+  <!-- ===================== -->
+  <!-- ALUMNOS: LIST + FORM  -->
+  <!-- ===================== -->
+
+  <!-- List view -->
+  <record id="view_gestion_escolar_student_list" model="ir.ui.view">
+    <field name="name">gestion_escolar.student.list</field>
+    <field name="model">gestion_escolar.student</field>
+    <field name="arch" type="xml">
+      <list string="Alumnos">
+        <field name="name"/>
+        <field name="last_name"/>
+        <field name="id_number"/>
+        <field name="class_id"/>
+        <field name="active"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form view -->
+  <record id="view_gestion_escolar_student_form" model="ir.ui.view">
+    <field name="name">gestion_escolar.student.form</field>
+    <field name="model">gestion_escolar.student</field>
+    <field name="arch" type="xml">
+      <form string="Alumno">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="last_name"/>
+            <field name="id_number"/>
+            <field name="class_id"/>
+            <field name="active"/>
+          </group>
+
+          <group>
+            <field name="birthdate"/>
+            <field name="age" readonly="1"/>
+          </group>
+
+          <notebook>
+            <page string="Eventos">
+              <field name="event_ids" widget="many2many_tags"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_gestion_escolar_student" model="ir.actions.act_window">
+    <field name="name">Alumnos</field>
+    <field name="res_model">gestion_escolar.student</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- Submenú Alumnos -->
+  <menuitem id="menu_gestion_escolar_student"
+            name="Alumnos"
+            parent="menu_gestion_escolar_root"
+            action="action_gestion_escolar_student"
+            sequence="20"/>
+
+
+  <!-- ===================== -->
+  <!-- EVENTOS: LIST + FORM  -->
+  <!-- ===================== -->
+
+  <!-- List view (SIN name) -->
+  <record id="view_gestion_escolar_event_list" model="ir.ui.view">
+    <field name="name">gestion_escolar.event.list</field>
+    <field name="model">gestion_escolar.event</field>
+    <field name="arch" type="xml">
+      <list string="Eventos">
+        <field name="date"/>
+        <field name="type"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form view (SIN name) -->
+  <record id="view_gestion_escolar_event_form" model="ir.ui.view">
+    <field name="name">gestion_escolar.event.form</field>
+    <field name="model">gestion_escolar.event</field>
+    <field name="arch" type="xml">
+      <form string="Evento">
+        <sheet>
+          <group>
+            <field name="date"/>
+            <field name="type"/>
+          </group>
+
+          <group>
+            <field name="description"/>
+          </group>
+
+          <notebook>
+            <page string="Alumnos">
+              <field name="student_ids" widget="many2many_tags"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_gestion_escolar_event" model="ir.actions.act_window">
+    <field name="name">Eventos</field>
+    <field name="res_model">gestion_escolar.event</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- Submenú Eventos -->
+  <menuitem id="menu_gestion_escolar_event"
+            name="Eventos"
+            parent="menu_gestion_escolar_root"
+            action="action_gestion_escolar_event"
+            sequence="30"/>
+
+</odoo>
